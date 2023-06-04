@@ -84,9 +84,9 @@ public function points( Request $request)
 {
         $user=Auth::user();
         $user_id=$user->id;
-    $quizPoints = Point::where('user_id',$user_id)->get(); // Retrieve all quiz points from the Point model
-\dd($quizPoints);
-  return view('user.pointtable', ['quizPoints' => $quizPoints]);
+        $quizPoints = Point::with('quiz')->where('user_id', $user_id)->get();
+        // $quizPoints= Point::where('user_id',$user_id)->get(); // Retrieve all quiz points from the Point model
+        return view('user.pointtable',['quizPoints' => $quizPoints]);
         
         
 }

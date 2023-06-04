@@ -15,7 +15,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        @include('user.partials.sidebar')
+
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -36,45 +36,32 @@
                         {{ session()->get('SUCCESS_MESSAGE') }}
                     </div>
                     @endif
-                    
-                    <div class="mx-12 my-4 ">
-                        <table class="border-separate border border-slate-400  w-full">
+<div class="container">
+                        <h1>Quiz Points</h1>
+                        @if ($quizPoints->isEmpty())
+                        <p>No quiz points available.</p>
+                        @else
+                        <table class="table">
                             <thead>
                                 <tr>
 
-                                    <th class="border border-slate-300 ...">Quiz name</th>
-                                    <th class="border border-slate-300 ...">Point</th>
-                                    <th class="border border-slate-300 ...">Total Questions</th>
-
+<th>Quiz Name</th>
+                                    <th>Points</th>
+                                    <th>Total Questions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($questions as $question)
-                                <tr>
-                                    <td class="border border-slate-300 ...">{{ $question->category->name }}</td>
-                                    <td class="border border-slate-300 ...">{{ $question->title }}</td>
-                                    <td class="border border-slate-300 ...">
-                                        <a class="text-blue-600"
-                                            href="{{ route('questions.edit', $question->id) }}">Edit</a>
+@foreach ($quizPoints as $quizPoint)
+<tr>
 
-                                        <a class="text-red-600" href="{{ route('questions.destroy', $question->id) }}"
-                                            onclick="event.preventDefault(); if (confirm('Are you sure you want to delete this question?')) { document.getElementById('delete-form-{{ $question->id }}').submit(); }">
-                                            Delete
-                                        </a>
-
-                                        <form id="delete-form-{{ $question->id }}"
-                                            action="{{ route('questions.destroy', $question->id) }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </td>
+<td>{{ $quizPoint->quiz->name }}</td>
+                                    <td>{{ $quizPoint->points }}</td>
+                                    <td>{{ $quizPoint->total_question }}</td>
                                 </tr>
-                                @endforeach
-
+@endforeach
                             </tbody>
                         </table>
-                        {{ $questions->links() }}
+@endif
                     </div>
 
                 </div>

@@ -12,7 +12,7 @@ class Point extends Model
     'user_id',
     'quiz_id',
     'points',
-    'total_question',
+    'total_question'
     ];
     public function user()
     {
