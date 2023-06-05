@@ -42,9 +42,9 @@ Route::resource('options',OptionController::class);
 Route::resource('quiz',QuizController::class);
 Route::resource('quizquestion',QuizquestionController::class);
 Route::get('/test',[UserController::class,'testQuiz'])->name('test');
-Route::get('/test/user',[UserController::class,'show'])->name('test.user');
-Route::post('/quiz/submit', [UserController::class, 'submit'])->name('quiz.submit');
-Route::get('/user/points',[UserController::class,'points'])->name('user.points');
+Route::middleware('auth')->get('/test/user',[UserController::class,'show'])->name('test.user');
+Route::middleware('auth')->post('/quiz/submit', [UserController::class, 'submit'])->name('quiz.submit');
+Route::middleware('auth')->get('/user/points',[UserController::class,'points'])->name('user.points');
 
 
 

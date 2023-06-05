@@ -13,7 +13,8 @@ use SoftDeletes;
     protected $fillable=[
         'category_id',
         'title',
-        'quiz_time'
+        'quiz_time',
+        'name',
     ];
     public function questions()
     {
